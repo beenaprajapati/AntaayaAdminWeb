@@ -84,7 +84,7 @@ export const sideNavItems: SideNavItems = {
     },
     users:
     {
-        icon: 'table',
+        icon: 'user',
         text: 'User',
         
         submenu: [

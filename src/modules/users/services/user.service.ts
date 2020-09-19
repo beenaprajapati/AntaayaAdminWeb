@@ -13,7 +13,7 @@ export class UserService {
         return this.httpClient.post<User>(`${this.Api_URL}/api/usermaster/create.php`, user);
       }
       getUser(){
-        return this.httpClient.get('https://api.github.com/events');
+       // return this.httpClient.get<User>('');
       }
       
 }

@@ -1,17 +1,17 @@
 export interface User{
     
-    id: number;
-    firstName: string;
-    middleName:string;
-    lastName: string;
-    userName:string;
-    email: string;
-    photo:string;
-    mobile: string;
-    type:string;
-    branch:string;
-    company:string;
-    password:string;
-    active:string;
-    confirmPassword:string;
+    Id: number;
+    FirstName: string;
+    MiddleName:string;
+    LastName: string;
+    UserName:string;
+    Email: string;
+    Photo:string;
+    Mobile: string;
+    Type:string;
+    Branch:string;
+    Company:string;
+    Password:string;
+    Active:string;
+    ConfirmPassword:string;
 }

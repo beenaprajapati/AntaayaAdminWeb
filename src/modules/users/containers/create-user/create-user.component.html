@@ -1,0 +1,175 @@
+<sb-layout-dashboard
+    ><sb-dashboard-head title="Create User" [hideBreadcrumbs]="false"></sb-dashboard-head
+    >
+
+    
+    <form name="form" (ngSubmit)="f.form.valid && saveUser(f)" novalidate #f="ngForm">
+        <div class="form-row">
+            
+            <div class="form-group col-5">
+                <label for="userName">User Name</label>
+                <input type="text" name="userName" class="form-control"  [(ngModel)]="model.userName" #userName="ngModel"  required>
+                <span class="text-danger"
+                *ngIf="(userName.touched || f.submitted) && userName.errors?.required">
+                User Name is required
+            </span>
+            </div>
+            
+            <div class="form-group col-5">
+                <label for="firstName">First Name</label>
+                <input type="text" name="firstName" class="form-control"  [(ngModel)]="model.firstName" #firstName="ngModel"  required>
+                <span class="text-danger"
+                *ngIf="(firstName.touched || f.submitted) && firstName.errors?.required">
+                First Name is required
+            </span>
+            </div>
+            
+            
+        </div>
+         <div class="form-row">
+            <div class="form-group col-5">
+                <label for="firstName">Middle Name</label>
+                <input type="text" name="middleName" class="form-control"  [(ngModel)]="model.middleName" #middleName="ngModel"  required>
+                <span class="text-danger"
+                *ngIf="(middleName.touched || f.submitted) && middleName.errors?.required">
+                Middle Name is required
+            </span>
+            </div>
+            <div class="form-group col-5">
+                <label for="lastName">  Last Name</label>
+                <input type="text" name="lastName" class="form-control" [(ngModel)]="model.lastName" #lastName="ngModel" required>
+                <span class="text-danger"
+                *ngIf="(lastName.touched || f.submitted) && lastName.errors?.required">
+                Last Name is required
+            </span>
+            </div>
+        
+        
+        </div>
+      <div class="form-row">
+        <div class="form-group col-5">
+            <label for="email">Email</label>
+            <input type="text" name="email" class="form-control" [(ngModel)]="model.email" #email="ngModel"  required email>
+            <span class="text-danger"
+                *ngIf="(email.touched || f.submitted) && email.errors?.required">
+                Email is required
+            </span>
+            <span class="text-danger" *ngIf="(email.touched || f.submitted)  && email.errors?.email">
+                Enter a valid email address
+            </span>
+        </div>
+        <div class="form-group col-5">
+            <label for="mobile">Mobile</label>
+            <input type="text" name="mobile" [pattern]="mobNumberPattern" class="form-control" [(ngModel)]="model.mobile" #mobile="ngModel" required >
+            <span class="text-danger"
+                *ngIf="(mobile.touched || f.submitted) && mobile.errors?.required">
+                Mobile is required
+            </span>
+            <span class="text-danger" *ngIf="mobile.errors?.pattern">  
+                Mobile number not valid.  
+            </span> 
+        </div>
+        
+        
+        </div>
+        <div class="form-row">
+            <div class="form-group col-5">
+                <label>User Type</label>
+                <select name="type" class="form-control" [(ngModel)]="model.type" #type="ngModel"  required>
+                    <option value="">--Select--</option>
+                    <option value="Admin">Admin</option>
+                    <option value="Normal User">Normal User</option>
+                </select>
+                <span class="text-danger"
+                *ngIf="(type.touched || f.submitted) && type.errors?.required">
+                User Type is required
+            </span>
+            </div>
+            <div class="form-group col-5">
+                <label>Branch</label>
+                <select name="branch" class="form-control" [(ngModel)]="model.branch" #branch="ngModel"  required>
+                    <option value="">--Select--</option>
+                    <option value="1">Main Branch</option>
+                    <option value="2">Sub Branch</option>
+                </select>
+                <span class="text-danger"
+                    *ngIf="(branch.touched || f.submitted) && branch.errors?.required">
+                    Branch is required
+                </span>
+            </div>
+
+        
+    </div>
+    <div class="form-row">
+    <div class="form-group col-5">
+        <label for="company">Company</label>
+        <select name="company" class="form-control" id="company" [(ngModel)]="model.company" #company="ngModel" required>
+            <option value="0">--Select--</option>
+            <option value="1">ABC</option>
+            <option value="2">XYZ</option>
+          
+        </select>
+        <span class="text-danger"
+        *ngIf="(company.touched || f.submitted) && company.errors?.required">
+        Company is required
+    </span>
+    </div>
+    
+        <div class="form-group col-5">
+            <label for="file">Profile Photo</label>
+    <input type="file"  class="form-control" name="photo" [(ngModel)]="model.photo" #photo="ngModel" required
+       id="file"
+       (change)="handleFileInput($event.target.files)">
+            <span class="text-danger photo"
+        *ngIf="(photo.touched || f.submitted) && photo.errors?.required">
+        Profile Photo is required
+    </span>
+    </div>
+   
+    </div>
+        <div class="form-row">
+            <div class="form-group col-5">
+                <label>Password</label>
+                <input type="password" name="password" class="form-control" [(ngModel)]="model.password" #password="ngModel"  required minlength="6">
+               
+                <span class="text-danger"
+            *ngIf="(password.touched || f.submitted) && password.errors?.required">
+            Password is required
+        </span>
+        <span class="text-danger" *ngIf="password.touched && password.errors?.invalidPassword">
+            Password should have minimum 8 characters, at least 1 uppercase letter, 1 lowercase
+            letter and 1 number
+        </span>
+            </div>
+            <div class="form-group col-5">
+                <label>Confirm Password</label>
+                <input type="password" name="confirmPassword" class="form-control" [(ngModel)]="model.confirmPassword" #confirmPassword="ngModel" required appConfirmEqualValidator='password'> 
+                <div *ngIf="f.submitted && confirmPassword.invalid" class="invalid-feedback">
+                    <div *ngIf="confirmPassword.errors?.required">Confirm Password is required</div>
+                    <div *ngIf="confirmPassword.errors?.mustMatch">Passwords must match</div>
+                </div>
+                <span class="text-danger"
+                                *ngIf="(confirmPassword.touched || f.submitted) && confirmPassword.errors?.required">
+                                Confirm Password is required
+                            </span>
+                            <div  class="text-danger" *ngIf="confirmPassword.errors?.notEqual && !confirmPassword.errors?.required">Password Mismatch
+                            </div>
+ 
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group col-5">
+                <div class="form-group form-check">
+                    <input type="checkbox" name="active" id="active" class="form-check-input" [(ngModel)]="model.active" #active="ngModel">
+                    <label for="active" class="form-check-label">IsActive</label>
+                </div> 
+                
+                </div>
+        </div>
+        <div class="text-center">
+            <button class="btn btn-primary mr-1">Save</button>
+            <button class="btn btn-secondary" type="reset">Cancel</button>
+        </div>
+    </form>
+</sb-layout-dashboard>

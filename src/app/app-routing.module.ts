@@ -40,6 +40,11 @@ const routes: Routes = [
             import('modules/utility/utility-routing.module').then(m => m.UtilityRoutingModule),
     },
     {
+         path: 'users',
+          loadChildren: () => 
+          import('modules/users/user-routing.module').then(m => m.UserRoutingModule),
+    },
+    {
         path: '**',
         pathMatch: 'full',
         loadChildren: () =>

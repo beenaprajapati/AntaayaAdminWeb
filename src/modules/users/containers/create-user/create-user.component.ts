@@ -17,7 +17,7 @@ export class CreateUserComponent implements OnInit {
   constructor(private userService:UserService) { }
 
   ngOnInit() {
-    this.model.active="N";
+    this.model.Active="N";
     this.getUserList();
   }
   saveUser(form:NgForm)
@@ -26,21 +26,20 @@ export class CreateUserComponent implements OnInit {
     var formObj=form.value;
     if(this.fileToUpload != null)
     {
-      formObj.photo=this.fileToUpload.name;
+      formObj.Photo=this.fileToUpload.name;
     }
-    if(formObj.active == true)
+    if(formObj.Active == true)
     {
-      formObj.active == "Y";
+      formObj.Active == "Y";
     }
     else{
-      formObj.active == "N";
+      formObj.Active == "N";
     }
     this.userService.createUser(formObj).subscribe((user: User)=>{
       console.log("user created, ", user);
     });
   }
   handleFileInput(files:any) {
-    debugger
     this.fileToUpload = files.item(0);
   }
   keyPress(event: any) {

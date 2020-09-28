@@ -2,14 +2,23 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {UserService} from '../modules/users/services/user.service'
-
+import { ToastrModule } from 'ngx-toastr';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatMenuModule} from '@angular/material/menu';
+import {MatIconModule} from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
     declarations: [AppComponent],
-    imports: [BrowserModule, AppRoutingModule, HttpClientModule,FormsModule],
+    imports: [BrowserModule, AppRoutingModule, HttpClientModule,FormsModule,BrowserAnimationsModule, ToastrModule.forRoot(),MatTableModule,MatPaginatorModule,MatSortModule,MatMenuModule,MatIconModule,MatFormFieldModule,MatInputModule,
+        NgbModule],
     providers: [],
     bootstrap: [AppComponent],
 })

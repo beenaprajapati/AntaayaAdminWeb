@@ -45,6 +45,43 @@ export const ROUTES: Routes = [
         canActivate: [],
        component: userContainers.CreateUserComponent,
     },
+    {
+        path: 'Edit/:Id',
+        data: {
+            title: 'UpdateUser',
+            breadcrumbs: [
+                {
+                    text: 'Dashboard',
+                    link: '/dashboard',
+                },
+                {
+                    text: 'Update User',
+                    active: true,
+                },
+            ],
+        } as SBRouteData,
+        canActivate: [],
+       component: userContainers.CreateUserComponent,
+    },
+        {
+            path: 'user-list',
+        data: {
+            title: 'UserList',
+            breadcrumbs: [
+                {
+                    text: 'Dashboard',
+                    link: '/dashboard',
+                },
+                {
+                    text: 'User List',
+                    active: true,
+                },
+            ],
+        } as SBRouteData,
+        
+        canActivate: [],
+       component: userContainers.UserListComponent,
+    },
     // {
     //     path: 'light',
     //     data: {

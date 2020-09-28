@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user.model';
 import { NgForm } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'sb-create-user',
@@ -11,52 +13,83 @@ import { NgForm } from '@angular/forms';
 })
 export class CreateUserComponent implements OnInit {
   model: any = {};
+  Id:number=0;
   users=[];
   fileToUpload:any;
   mobNumberPattern = "^((\\+91-?)|0)?[0-9]{10}$";  
-  constructor(private userService:UserService) { }
+  constructor(private userService:UserService,private toastr:ToastrService,private route:ActivatedRoute,
+              private router:Router) { }
 
-  ngOnInit() {
-    this.model.Active="N";
-    this.getUserList();
-  }
-  saveUser(form:NgForm)
+  ngOnInit() 
   {
-    debugger
-    var formObj=form.value;
-    if(this.fileToUpload != null)
-    {
-      formObj.Photo=this.fileToUpload.name;
+    this.model.Active = "Y";
+    this.route.params.subscribe(params => {
+      if (params['Id']) {
+      this.Id= params['Id'];
+      if(this.Id !=null)
+      {
+        this.userService.getUserByID(this.Id).subscribe((udata:any) =>
+        {
+          if(udata != null)
+          {
+            this.model=udata;
+          }
+        })
+      }
     }
-    if(formObj.Active == true)
-    {
-      formObj.Active == "Y";
-    }
-    else{
-      formObj.Active == "N";
-    }
-    this.userService.createUser(formObj).subscribe((user: User)=>{
-      console.log("user created, ", user);
     });
   }
-  handleFileInput(files:any) {
-    this.fileToUpload = files.item(0);
+  // Save user data
+  saveUser(form:NgForm)
+  {
+    if(form != null)
+    {
+      var formObj=form.value;
+      if(this.fileToUpload != null)
+      {
+        formObj.Photo=this.fileToUpload.name;
+      }
+      if(formObj.Active == true)
+      {
+        formObj.Active == "Y";
+      }
+      else{
+        formObj.Active == "N";
+      }
+      this.userService.createUser(formObj).subscribe((user: User)=>{
+        if(user != null)
+        {
+          this.toastr.success("User created successfully");
+        }
+        this.router.navigate(['/user-list']);
+      },
+      err => {
+        if (err != null)
+          if (err != null && err.error.message != null) {
+            this.toastr.error(err.error.message);
+          }
+          else {
+            this.toastr.error(err["message"]);
+          }
+        else {
+          this.toastr.error(err["message"]);
+        }
+      });
+    }
   }
+
+  // change profile photo
+  handleFileInput(files:any) {
+    if(files != null)
+    this.fileToUpload = files.item(0);
+  } 
+  // validation of mobile 
   keyPress(event: any) {
     const pattern = /[0-9\+\-\ ]/;
-
     let inputChar = String.fromCharCode(event.charCode);
     if (event.keyCode != 8 && !pattern.test(inputChar)) {
       event.preventDefault();
     }
   }
-  getUserList()
-  {
-    // this.userService.getUser().subscribe((data)=>{
-    //   console.log("user get, ", data);
-    // });
-  }
   
-    
-
 }

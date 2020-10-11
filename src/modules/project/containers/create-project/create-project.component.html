@@ -1,0 +1,86 @@
+<sb-layout-dashboard>
+    <sb-dashboard-head *ngIf="Id == 0" title="Create Project" [hideBreadcrumbs]="false"></sb-dashboard-head>
+    
+    <sb-dashboard-head *ngIf="Id != 0" title="Update Project" [hideBreadcrumbs]="false"></sb-dashboard-head>
+        
+
+    
+    <form name="form" (ngSubmit)="f.form.valid && saveProject(f)" novalidate #f="ngForm">
+        <div class="form-row">
+          
+            
+            <div class="form-group col-4">
+                <label for="ProjectName">Project Name</label>
+                <input type="text" name="ProjectName" class="form-control"  [(ngModel)]="model.ProjectName" #ProjectName="ngModel"  required>
+                <span class="text-danger"
+                *ngIf="(ProjectName.touched || f.submitted) && ProjectName.errors?.required">
+                Project Name  is required
+            </span>
+            </div>
+            <div class="form-group col-4">
+                <label for="BudgetValues">  Budget Value</label>
+                <input type="text" name="BudgetValues" class="form-control" [(ngModel)]="model.BudgetValues" #BudgetValues="ngModel" required>
+                <span class="text-danger"
+                *ngIf="(BudgetValues.touched || f.submitted) && BudgetValues.errors?.required">
+                Budget Value is required
+            </span>
+            </div>
+            <div class="form-group col-4">
+                <label for="file">Photo</label>
+        <input type="file"  class="form-control" name="FileUpload" [(ngModel)]="model.FileUpload" #FileUpload="ngModel" 
+           id="FileUpload"
+           (change)="handleFileInput($event.target.files)">
+        </div>
+           
+            
+        </div>
+        
+      <div class="form-row">
+        <div class="form-group col-4">
+            <label for="ClientName">Client Name</label>
+            <input type="text" name="ClientName" class="form-control" [(ngModel)]="model.ClientName" #ClientName="ngModel"  required >
+            <span class="text-danger"
+                *ngIf="(ClientName.touched || f.submitted) && ClientName.errors?.required">
+                Client Name is required
+            </span>
+        </div>
+        <div class="form-group col-4">
+            <label for="Mobile">Mobile</label>
+            <input type="text" name="Mobile" [pattern]="mobNumberPattern" class="form-control" [(ngModel)]="model.Mobile" #Mobile="ngModel" required >
+            <span class="text-danger"
+                *ngIf="(Mobile.touched || f.submitted) && Mobile.errors?.required">
+                Mobile is required
+            </span>
+            <span class="text-danger" *ngIf="Mobile.errors?.pattern">  
+                Mobile number not valid.  
+            </span> 
+        </div>
+       
+        
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group col-4">
+                <label>Address</label>
+                <textarea type="text" name="Address" class="form-control" [(ngModel)]="model.Address" #Address="ngModel" ></textarea>
+                <!-- <span class="text-danger"
+                *ngIf="(Address.touched || f.submitted) && Address.errors?.required">
+                Address is required
+            </span> -->
+            </div>
+            <div class="form-group col-4">
+                <label for="Remarks">Remark</label>
+                <textarea type="text" name="Remarks" class="form-control"  [(ngModel)]="model.Remarks" #Remarks="ngModel"  >
+                    </textarea>
+
+               
+            </div>
+        </div>
+        
+       
+        <div class="text-center">
+            <button class="btn btn-primary mr-1">Save</button>
+            <button class="btn btn-secondary" type="reset">Cancel</button>
+        </div>
+    </form>
+</sb-layout-dashboard>

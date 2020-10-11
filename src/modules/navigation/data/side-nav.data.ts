@@ -3,10 +3,10 @@ import { SideNavItems, SideNavSection } from '@modules/navigation/models';
 export const sideNavSections: SideNavSection[] = [
     {
         text: 'Antaaya',
-        items: ['dashboard','users']
-      //  items: ['users'],
+        items: ['dashboard', 'users', 'project']
+        //  items: ['users'],
     },
-   
+
     // z
 ];
 
@@ -84,7 +84,7 @@ export const sideNavItems: SideNavItems = {
     {
         icon: 'user',
         text: 'Users',
-        
+
         // submenu: [
         //     {
         //         text: 'Create User',
@@ -92,7 +92,15 @@ export const sideNavItems: SideNavItems = {
         //     },
         //     {
         //         text: 'User List',
-                link: '/users/user-list',
-           
+        link: '/users/user-list',
+
+    }
+    ,
+    project:
+    {
+        icon: 'user',
+        text: 'project',
+        link: '/project/project-list',
+
     }
 };

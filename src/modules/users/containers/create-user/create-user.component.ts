@@ -13,76 +13,77 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class CreateUserComponent implements OnInit {
   model: any = {};
-  Id:number=0;
-  users=[];
-  fileToUpload:any;
-  mobNumberPattern = "^((\\+91-?)|0)?[0-9]{10}$";  
-  constructor(private userService:UserService,private toastr:ToastrService,private route:ActivatedRoute,
-              private router:Router) { }
+  Id: number = 0;
+  users = [];
+  fileToUpload: any;
+  mobNumberPattern = "^((\\+91-?)|0)?[0-9]{10}$";
+  constructor(private userService: UserService, private toastr: ToastrService, private route: ActivatedRoute,
+    private router: Router) { }
 
-  ngOnInit() 
-  {
+  ngOnInit() {
     this.model.Active = "Y";
     this.route.params.subscribe(params => {
       if (params['Id']) {
-      this.Id= params['Id'];
-      if(this.Id !=null)
-      {
-        this.userService.getUserByID(this.Id).subscribe((udata:any) =>
-        {
-          if(udata != null)
-          {
-            this.model=udata;
-          }
-        })
+        this.Id = parseInt(params['Id']);
+        if (this.Id != null) {
+          this.userService.getUserByID(this.Id).subscribe((udata: any) => {
+            if (udata != null) {
+              this.model = udata;
+            }
+          })
+        }
       }
-    }
     });
   }
   // Save user data
-  saveUser(form:NgForm)
-  {
-    if(form != null)
-    {
-      var formObj=form.value;
-      if(this.fileToUpload != null)
-      {
-        formObj.Photo=this.fileToUpload.name;
+  saveUser(form: NgForm) {
+    if (form != null) {
+      var formObj = form.value;
+      if (this.Id != 0) {
+        let id = this.Id;
+        formObj.USerId =id;
       }
-      if(formObj.Active == true)
-      {
+      if (this.fileToUpload != null) {
+        formObj.Photo = this.fileToUpload.name;
+      }
+      if (formObj.Active == true) {
         formObj.Active == "Y";
       }
-      else{
+      else {
         formObj.Active == "N";
       }
-      this.userService.createUser(formObj).subscribe((user: User)=>{
-        if(user != null)
-        {
-          this.toastr.success("User created successfully");
-        }
-        this.router.navigate(['/user-list']);
-      },
-      err => {
-        if (err != null)
-          if (err != null && err.error.message != null) {
-            this.toastr.error(err.error.message);
+
+      this.userService.createUser(formObj, this.Id).subscribe((user: User) => {
+        if (user != null) {
+          if (this.Id != 0) {
+            this.toastr.success("User updated successfully");
           }
+          else {
+            this.toastr.success("User created successfully");
+          }
+          this.router.navigate(['/users/user-list']);
+        }
+      },
+        err => {
+          if (err != null)
+            if (err != null && err.error.message != null) {
+              this.toastr.error(err.error.message);
+            }
+            else {
+              this.toastr.error(err["message"]);
+            }
           else {
             this.toastr.error(err["message"]);
           }
-        else {
-          this.toastr.error(err["message"]);
-        }
-      });
+        });
     }
   }
 
   // change profile photo
-  handleFileInput(files:any) {
-    if(files != null)
-    this.fileToUpload = files.item(0);
-  } 
+  handleFileInput(files: any) {
+    if (files != null)
+      this.fileToUpload = files.item(0);
+  }
   // validation of mobile 
   keyPress(event: any) {
     const pattern = /[0-9\+\-\ ]/;
@@ -91,5 +92,5 @@ export class CreateUserComponent implements OnInit {
       event.preventDefault();
     }
   }
-  
+
 }

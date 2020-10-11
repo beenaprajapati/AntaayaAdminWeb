@@ -44,6 +44,12 @@ const routes: Routes = [
           loadChildren: () => 
           import('modules/users/user-routing.module').then(m => m.UserRoutingModule),
     },
+    
+    {
+         path: 'project',
+          loadChildren: () => 
+          import('modules/project/project-routing.module').then(m => m.ProjectRoutingModule),
+    },
     {
         path: '**',
         pathMatch: 'full',

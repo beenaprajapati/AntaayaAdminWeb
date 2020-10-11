@@ -4,6 +4,7 @@
 
 export const environment = {
     production: false,
+    baseUrl:'https://antaayaarchitects.com/RESTAPI/v1/'
 };
 
 /*

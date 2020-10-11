@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { ToastrService } from 'ngx-toastr';
@@ -16,7 +16,7 @@ export class UserListComponent implements OnInit {
   users=[{'Id':1,'FirstName':'abc'}];
   dataSource :any;
   pageSizeList: any[] = [5, 10, 20];
-  pageSize: number = 10;
+  pageSize: number = 100;
   pageIndex: number = 1;
   gridTotalRecord: number=0;
   SearchText: string = '';
@@ -24,6 +24,7 @@ export class UserListComponent implements OnInit {
   Id:number=0;
   closeResult: string='';
   @Input('pagination') pagination =false;
+ 
   @ViewChild(MatPaginator,  {static: false}) set matPaginator(paginator: MatPaginator) {
     if (this.pagination) {
       this.dataSource.paginator = paginator;
@@ -31,7 +32,7 @@ export class UserListComponent implements OnInit {
   }
   
   constructor(private userService:UserService,private toastr:ToastrService,
-    private modalService:NgbModal) {
+    private modalService:NgbModal,private ele:ElementRef) {
   }
 
   ngOnInit(): void {
@@ -41,6 +42,7 @@ export class UserListComponent implements OnInit {
   open(content:any,Id:number) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
+  
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
@@ -48,6 +50,7 @@ export class UserListComponent implements OnInit {
   }
   // close modal popup
   private getDismissReason(reason: any): string {
+    debugger
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
@@ -62,12 +65,12 @@ export class UserListComponent implements OnInit {
     if (this.SearchText.length > 0 && !searchWithPaging) {
       this.pageIndex = 1;
       this.dataSource.firstPage();
-    }this.dataSource=this.users;
+    }
     this.userService.getUser(this.SearchText,this.pageIndex, this.pageSize, this.sortHeader).subscribe((user: any)=>{
       if(user != null)
       {
-        this.dataSource=this.users;
-        this.gridTotalRecord = user.params.count;
+        this.dataSource=user;
+        //this.gridTotalRecord = user.params.count;
       }
       else {
         this.dataSource = null;
@@ -129,7 +132,12 @@ export class UserListComponent implements OnInit {
       {
         if(udata != null)
         {
+          
             this.toastr.success("User deleted successfully");
+           let cl= this.ele.nativeElement.querySelector('.close');
+           //cl.click();
+            this.getDismissReason("deleted");
+
         }
         this.bindUserList(false);
       },

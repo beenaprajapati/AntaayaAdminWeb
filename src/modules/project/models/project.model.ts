@@ -1,11 +1,11 @@
 export interface Project{
     
     ProjectID: number;
-    ProejctName: string;
+    PorjectName: string;
     ClientName:string;
     Address: string;
-    Mobile:string;
+    MobileNo:string;
     Remark: string;
-    BudgeteValues:string;
+    BujgetValues:string;
     FileUpload:string
 }

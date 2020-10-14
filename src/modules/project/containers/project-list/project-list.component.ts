@@ -1,9 +1,11 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { ToastrService } from 'ngx-toastr';
 import { ProjectService } from '../../services/project.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { Project } from '@modules/project/models';
+import { MatTableDataSource } from '@angular/material/table';
 @Component({
   selector: 'sb-project-list',
   templateUrl: './project-list.component.html',
@@ -12,9 +14,9 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
   providers: [ProjectService]
 })
 export class ProjectListComponent implements OnInit {
-  displayedColumns: string[] = ['Action', 'ProjectName', 'ClientName', 'Mobile','BudgetValues', ];
+  displayedColumns: string[] = ['Action', 'PorjectName', 'ClientName', 'MobileNo','BujgetValues', ];
   projectList = [];
-  dataSource: any;
+  //dataSource: any;
   pageSizeList: any[] = [5, 10, 20];
   pageSize: number = 10;
   pageIndex: number = 1;
@@ -23,7 +25,13 @@ export class ProjectListComponent implements OnInit {
   sortHeader: string = '';
   Id: number = 0;
   closeResult: string = '';
+  rowCount:number;
   @Input('pagination') pagination = false;
+  dataSource = new MatTableDataSource<Project>();
+  
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild('closeButton') closeButton: ElementRef; 
   @ViewChild(MatPaginator, { static: false }) set matPaginator(paginator: MatPaginator) {
     if (this.pagination) {
       this.dataSource.paginator = paginator;
@@ -35,6 +43,7 @@ export class ProjectListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    debugger;
     this.bindProjectList(false);
   }
   // open modal popup
@@ -60,15 +69,23 @@ export class ProjectListComponent implements OnInit {
   bindProjectList(searchWithPaging: any) {
     if (this.SearchText.length > 0 && !searchWithPaging) {
       this.pageIndex = 1;
-      this.dataSource.firstPage();
+      this.paginator.firstPage();
     }
     this.projectService.getProject(this.SearchText, this.pageIndex, this.pageSize, this.sortHeader).subscribe((user: any) => {
-      if (user != null) {
-        this.dataSource = user;
-        this.gridTotalRecord = user.params.count;
+      if(user != null)
+      { setTimeout( () => {
+
+        this.dataSource.data=user;
+        for(var i=0;i<user.length ;i++)
+        {
+        this.rowCount =user[i].RowCount;
+        }
+        this.gridTotalRecord = this.rowCount;
+        
+      },0);
       }
       else {
-        this.dataSource = null;
+        this.dataSource.data= [];
         this.setEmptyGrid();
       }
     },
@@ -85,21 +102,21 @@ export class ProjectListComponent implements OnInit {
   }
   //Empty grid
   setEmptyGrid() {
-    this.dataSource = null;
+    this.dataSource.data=[];
     this.gridTotalRecord = 0;
   }
   // Page change
   changePage(event: any) {
-    this.dataSource = null;
+    this.dataSource.data=[];
     this.pageIndex = (event.pageIndex) + 1;
     this.pageSize = event.pageSize;
     this.bindProjectList(true);
   }
   // Sorting table data
   getGridData() {
-    var sortData = this.dataSource.sort;
-    var sortDataname = this.dataSource.sort.active;
-    var sortDirection = this.dataSource.sort.direction;
+    var sortData = this.dataSource.data.sort;
+    var sortDataname = this.dataSource.sort?.active;
+    var sortDirection = this.dataSource.sort?.direction;
     if (sortDataname == 'ProjectName') {
       sortDataname = 'ProjectName';
     }
@@ -118,7 +135,7 @@ export class ProjectListComponent implements OnInit {
   }
   //Search table data
   searchValue() {
-    this.dataSource = null;
+    this.dataSource.data=[];
     this.bindProjectList(false);
   }
   // Delete User
@@ -127,6 +144,7 @@ export class ProjectListComponent implements OnInit {
       this.projectService.deleteProject(this.Id).subscribe((udata: any) => {
         if (udata != null) {
           this.toastr.success("Project deleted successfully");
+          this.modalService.dismissAll("Cross click");
         }
         this.bindProjectList(false);
       },

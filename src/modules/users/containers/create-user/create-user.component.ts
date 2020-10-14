@@ -17,6 +17,7 @@ export class CreateUserComponent implements OnInit {
   users = [];
   fileToUpload: any;
   mobNumberPattern = "^((\\+91-?)|0)?[0-9]{10}$";
+  labelFile:string='';
   constructor(private userService: UserService, private toastr: ToastrService, private route: ActivatedRoute,
     private router: Router) { }
 
@@ -29,6 +30,7 @@ export class CreateUserComponent implements OnInit {
           this.userService.getUserByID(this.Id).subscribe((udata: any) => {
             if (udata != null) {
               this.model = udata;
+              this.labelFile =this.model.Photo;
             }
           })
         }
@@ -42,6 +44,10 @@ export class CreateUserComponent implements OnInit {
       if (this.Id != 0) {
         let id = this.Id;
         formObj.USerId =id;
+        if (this.fileToUpload == null) {
+          formObj.Photo =this.labelFile;
+        }
+
       }
       if (this.fileToUpload != null) {
         formObj.Photo = this.fileToUpload.name;
@@ -55,6 +61,7 @@ export class CreateUserComponent implements OnInit {
 
       this.userService.createUser(formObj, this.Id).subscribe((user: User) => {
         if (user != null) {
+          debugger;
           if (this.Id != 0) {
             this.toastr.success("User updated successfully");
           }
@@ -62,6 +69,7 @@ export class CreateUserComponent implements OnInit {
             this.toastr.success("User created successfully");
           }
           this.router.navigate(['/users/user-list']);
+          
         }
       },
         err => {

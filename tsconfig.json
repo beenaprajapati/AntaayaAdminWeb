@@ -20,7 +20,7 @@
         ],
         "module": "esnext",
         "moduleResolution": "node",
-        "noImplicitAny": false,
+        "noImplicitAny": true,
         "outDir": "./dist/out-tsc",
         "paths": {
             "@app/*": [
@@ -43,6 +43,7 @@
         "typeRoots": [
             "node_modules/@types",
             "src/typings"
-        ]
+        ],
+        "strictPropertyInitialization": false
     }
 }

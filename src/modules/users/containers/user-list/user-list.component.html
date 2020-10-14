@@ -69,23 +69,20 @@ title="Edit" mat-menu-item>
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-     <ng-container matColumnDef="noData">
-        <td mat-footer-cell *matFooterCellDef colspan="6">
-          No records found
-        </td>
-      </ng-container>
-
-      <tr mat-footer-row *matFooterRowDef="['noData']"
-          [ngClass]="{'hide':(dataSource!=null)}"></tr>               
+     <ng-container>
+      <td mat-footer-cell *matFooterCellDef colspan="6" [ngClass]="{'hide':(dataSource.length >0)}">
+        No records found
+      </td>
+    </ng-container>
   </table>
-  <mat-paginator [pageSize]="100" [length]="gridTotalRecord" [pageSizeOptions]="pageSizeList"
+  <mat-paginator [pageSize]="10" [length]="gridTotalRecord" [pageSizeOptions]="pageSizeList"
   (page)="changePage($event)" showFirstLastButtons>
 </mat-paginator>
   </sb-layout-dashboard>
   <ng-template #mymodal let-modal>
     <div class="modal-header">
       <h4 class="modal-title" id="modal-basic-title">Delete Confirmation</h4>
-      <button type="button" class="close" id="close" #closebutton aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <button type="button" class="close" id="close" #closeButton aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true">×</span>
       </button>
     </div>

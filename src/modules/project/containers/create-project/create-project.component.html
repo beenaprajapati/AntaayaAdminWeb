@@ -10,29 +10,27 @@
           
             
             <div class="form-group col-4">
-                <label for="ProjectName">Project Name</label>
-                <input type="text" name="ProjectName" class="form-control"  [(ngModel)]="model.ProjectName" #ProjectName="ngModel"  required>
+                <label for="PorjectName">Project Name</label>
+                <input type="text" name="PorjectName" class="form-control"  [(ngModel)]="model.PorjectName" #PorjectName="ngModel"  required>
                 <span class="text-danger"
-                *ngIf="(ProjectName.touched || f.submitted) && ProjectName.errors?.required">
+                *ngIf="(PorjectName.touched || f.submitted) && PorjectName.errors?.required">
                 Project Name  is required
             </span>
             </div>
             <div class="form-group col-4">
-                <label for="BudgetValues">  Budget Value</label>
-                <input type="text" name="BudgetValues" class="form-control" [(ngModel)]="model.BudgetValues" #BudgetValues="ngModel" required>
+                <label for="BujgetValues">  Budget Value</label>
+                <input type="number"  name="BujgetValues" class="form-control" [(ngModel)]="model.BujgetValues" #BujgetValues="ngModel" required>
                 <span class="text-danger"
-                *ngIf="(BudgetValues.touched || f.submitted) && BudgetValues.errors?.required">
+                *ngIf="(BujgetValues.touched || f.submitted) && BujgetValues.errors?.required">
                 Budget Value is required
             </span>
             </div>
-            <div class="form-group col-4">
-                <label for="file">Photo</label>
+        <div class="form-group col-4">
+        <label for="file">Photo</label>
         <input type="file"  class="form-control" name="FileUpload" [(ngModel)]="model.FileUpload" #FileUpload="ngModel" 
            id="FileUpload"
            (change)="handleFileInput($event.target.files)">
         </div>
-           
-            
         </div>
         
       <div class="form-row">
@@ -45,13 +43,13 @@
             </span>
         </div>
         <div class="form-group col-4">
-            <label for="Mobile">Mobile</label>
-            <input type="text" name="Mobile" [pattern]="mobNumberPattern" class="form-control" [(ngModel)]="model.Mobile" #Mobile="ngModel" required >
+            <label for="MobileNo">Mobile</label>
+            <input type="text" name="MobileNo" [pattern]="mobNumberPattern" class="form-control" [(ngModel)]="model.MobileNo" #MobileNo="ngModel" required >
             <span class="text-danger"
-                *ngIf="(Mobile.touched || f.submitted) && Mobile.errors?.required">
+                *ngIf="(MobileNo.touched || f.submitted) && MobileNo.errors?.required">
                 Mobile is required
             </span>
-            <span class="text-danger" *ngIf="Mobile.errors?.pattern">  
+            <span class="text-danger" *ngIf="MobileNo.errors?.pattern">  
                 Mobile number not valid.  
             </span> 
         </div>
@@ -69,8 +67,8 @@
             </span> -->
             </div>
             <div class="form-group col-4">
-                <label for="Remarks">Remark</label>
-                <textarea type="text" name="Remarks" class="form-control"  [(ngModel)]="model.Remarks" #Remarks="ngModel"  >
+                <label for="Remark">Remark</label>
+                <textarea type="text" name="Remark" class="form-control"  [(ngModel)]="model.Remark" #Remark="ngModel"  >
                     </textarea>
 
                

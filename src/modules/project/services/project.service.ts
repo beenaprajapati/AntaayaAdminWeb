@@ -10,14 +10,14 @@ export class ProjectService {
         {
 
         }
-        createProject(project: Project): Observable<Project>{
-        if(project.ProjectID==null)
+        createProject(project: Project,Id :number): Observable<Project>{
+        if(Id == 0)
         {
-          return this.httpClient.post<Project>(`${this.Api_URL}CreateProject/Insert`, project);
+          return this.httpClient.post<Project>(`${this.Api_URL}createproject/Insert`, project);
         }
         else
         {
-          return this.httpClient.put<Project>(`${this.Api_URL}CreateProject/Update`, project);
+          return this.httpClient.put<Project>(`${this.Api_URL}createproject/Update`, project);
         }
       }
       getProject(searchText:any, PageIndex:any, PageSize:any, sortHeader:any) {
@@ -26,14 +26,14 @@ export class ProjectService {
         params = params.append('offset', PageIndex);
         params = params.append('limit', PageSize);
         params = params.append('sort_type', sortHeader);
-        return this.httpClient.get(`${this.Api_URL}CreateProject/`,{params:params});
+        return this.httpClient.get(`${this.Api_URL}createproject/`,{params:params});
       }
       getProjectByID(Id:number)
       {
-        return this.httpClient.get(`${this.Api_URL}CreateProject/`+Id);
+        return this.httpClient.get(`${this.Api_URL}createproject/`+Id);
       }
       deleteProject(Id:number)
       {
-        return this.httpClient.delete(`${this.Api_URL}CreateProject/delete`+Id);
+        return this.httpClient.delete(`${this.Api_URL}createproject/`+Id);
       }
 }

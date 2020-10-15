@@ -61,7 +61,6 @@ export class CreateUserComponent implements OnInit {
 
       this.userService.createUser(formObj, this.Id).subscribe((user: User) => {
         if (user != null) {
-          debugger;
           if (this.Id != 0) {
             this.toastr.success("User updated successfully");
           }

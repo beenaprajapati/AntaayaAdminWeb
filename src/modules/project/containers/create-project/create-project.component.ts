@@ -29,7 +29,6 @@ export class CreateProjectComponent implements OnInit {
   ngOnInit() 
   {
     this.route.params.subscribe(params => {
-      debugger
       if (params['Id']) {
       this.Id= params['Id'];
       if(this.Id !=null)
@@ -49,7 +48,6 @@ export class CreateProjectComponent implements OnInit {
   // Save user data
   saveProject(form:NgForm)
   {
-    debugger
     if(form != null)
     {
       var formObj=form.value;

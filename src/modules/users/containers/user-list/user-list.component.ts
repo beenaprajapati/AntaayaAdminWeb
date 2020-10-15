@@ -17,7 +17,7 @@ export class UserListComponent implements OnInit {
   displayedColumns: string[] = ['Action','FirstName', 'MiddleName', 'LastName', 'Email'];
   users=[{'Id':1,'FirstName':'abc'}];
   //dataSource =new MatTableDataSourc(any);
-  dataSource = new MatTableDataSource<User>();
+  dataSource = new MatTableDataSource<User>([]);
   pageSizeList: any[] = [5, 10, 20];
   pageSize: number = 10;
   pageIndex: number = 1;

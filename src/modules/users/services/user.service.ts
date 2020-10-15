@@ -22,10 +22,11 @@ export class UserService {
       }
       getUser(searchText:any, PageIndex:any, PageSize:any, sortHeader:any) {
         let params = new HttpParams();
-        params = params.append('sort_by', searchText);
+        params = params.append('sort_by', '');
         params = params.append('offset', PageIndex);
         params = params.append('limit', PageSize);
         params = params.append('sort_type', sortHeader);
+        params = params.append('keyword', searchText);
         return this.httpClient.get(`${this.Api_URL}/usermaster/`,{params:params});
       }
       getUserByID(Id:number)

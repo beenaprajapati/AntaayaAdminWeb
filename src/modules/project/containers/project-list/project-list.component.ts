@@ -43,7 +43,6 @@ export class ProjectListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    debugger;
     this.bindProjectList(false);
   }
   // open modal popup

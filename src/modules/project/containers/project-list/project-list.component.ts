@@ -6,6 +6,7 @@ import { ProjectService } from '../../services/project.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Project } from '@modules/project/models';
 import { MatTableDataSource } from '@angular/material/table';
+import { User } from '@testing/mocks';
 @Component({
   selector: 'sb-project-list',
   templateUrl: './project-list.component.html',
@@ -27,7 +28,7 @@ export class ProjectListComponent implements OnInit {
   closeResult: string = '';
   rowCount:number;
   @Input('pagination') pagination = false;
-  dataSource = new MatTableDataSource<Project>();
+  dataSource :any;
   
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -40,6 +41,7 @@ export class ProjectListComponent implements OnInit {
 
   constructor(private projectService: ProjectService, private toastr: ToastrService,
     private modalService: NgbModal) {
+      this.dataSource = new MatTableDataSource<Project>([]);
   }
 
   ngOnInit(): void {
@@ -75,6 +77,8 @@ export class ProjectListComponent implements OnInit {
       { setTimeout( () => {
 
         this.dataSource.data=user;
+        this.dataSource = new MatTableDataSource<User>(user);
+        //this.dataSource = new MatTableDataSource(user);
         for(var i=0;i<user.length ;i++)
         {
         this.rowCount =user[i].RowCount;

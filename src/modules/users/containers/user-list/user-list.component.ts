@@ -17,7 +17,7 @@ export class UserListComponent implements OnInit {
   displayedColumns: string[] = ['Action','FirstName', 'MiddleName', 'LastName', 'Email'];
   users=[{'Id':1,'FirstName':'abc'}];
   //dataSource =new MatTableDataSourc(any);
-  dataSource = new MatTableDataSource<User>([]);
+  dataSource :any;
   pageSizeList: any[] = [5, 10, 20];
   pageSize: number = 10;
   pageIndex: number = 1;
@@ -34,7 +34,7 @@ export class UserListComponent implements OnInit {
   @ViewChild('closeButton') closeButton: ElementRef;
   constructor(private userService:UserService,private toastr:ToastrService,
     private modalService:NgbModal,private ele:ElementRef) {
-      
+      this.dataSource = new MatTableDataSource<User>([]);
   }
 
   

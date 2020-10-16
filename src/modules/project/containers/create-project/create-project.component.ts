@@ -24,7 +24,9 @@ export class CreateProjectComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild('closeButton') closeButton: ElementRef; 
   constructor(private projectService:ProjectService,private toastr:ToastrService,private route:ActivatedRoute,
-              private router:Router) { }
+              private router:Router) {
+                
+               }
 
   ngOnInit() 
   {

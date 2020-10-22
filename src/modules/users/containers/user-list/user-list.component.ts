@@ -76,17 +76,14 @@ export class UserListComponent implements OnInit {
     }
     this.userService.getUser(this.SearchText,this.pageIndex, this.pageSize, this.sortHeader).subscribe((user: any)=>{
       if(user != null)
-      { setTimeout( () => {
-
-        this.dataSource.data=user;
+      { 
+        this.dataSource.data=user.items;
         console.log(user);
-        for(var i=0;i<user.length ;i++)
+        for(var i=0;i<user.items.length ;i++)
         {
-        this.rowCount =user[i].RowCount;
+        this.rowCount =user.items[i].RowCount;
         }
         this.gridTotalRecord = this.rowCount;
-        
-      },0);
       }
       else {
         this.dataSource.data= [];

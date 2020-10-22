@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Input, NgZone, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { ToastrService } from 'ngx-toastr';
@@ -40,12 +40,23 @@ export class ProjectListComponent implements OnInit {
   }
 
   constructor(private projectService: ProjectService, private toastr: ToastrService,
-    private modalService: NgbModal) {
+    private modalService: NgbModal,
+    private zone:NgZone,
+    private cd :ChangeDetectorRef) {
       this.dataSource = new MatTableDataSource<Project>([]);
   }
 
   ngOnInit(): void {
-    this.bindProjectList(false);
+    
+      setTimeout(() => {
+        
+      
+        this.bindProjectList(false);
+        
+        
+      },5000);
+    
+   
   }
   // open modal popup
   open(content: any, Id: number) {
@@ -84,6 +95,7 @@ export class ProjectListComponent implements OnInit {
         this.rowCount =user[i].RowCount;
         }
         this.gridTotalRecord = this.rowCount;
+        this.cd.detectChanges();
         
       },0);
       }

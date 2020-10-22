@@ -29,7 +29,7 @@ export class CreateUserComponent implements OnInit {
         if (this.Id != null) {
           this.userService.getUserByID(this.Id).subscribe((udata: any) => {
             if (udata != null) {
-              this.model = udata;
+              this.model = udata.items[0];
               this.labelFile =this.model.Photo;
             }
           })

@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    baseUrl:'https://antaayaarchitects.com/RESTAPI/v1/'
+    baseUrl:'https://antaayaarchitects.com/antaaya_api/'
 };

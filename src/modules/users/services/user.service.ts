@@ -13,11 +13,11 @@ export class UserService {
         createUser(user: User,id :number): Observable<User>{
         if(id==0)
         {
-          return this.httpClient.post<User>(`${this.Api_URL}usermaster/Insert`, user);
+          return this.httpClient.post<User>(`${this.Api_URL}usermaster/create`, user);
         }
         else
         {
-          return this.httpClient.put<User>(`${this.Api_URL}usermaster/Update`, user);
+          return this.httpClient.put<User>(`${this.Api_URL}usermaster/update`, user);
         }
       }
       getUser(searchText:any, PageIndex:any, PageSize:any, sortHeader:any) {
@@ -27,14 +27,14 @@ export class UserService {
         params = params.append('limit', PageSize);
         params = params.append('sort_type', sortHeader);
         params = params.append('keyword', searchText);
-        return this.httpClient.get(`${this.Api_URL}/usermaster/`,{params:params});
+        return this.httpClient.get(`${this.Api_URL}usermaster/read.php`);
       }
       getUserByID(Id:number)
       {
-        return this.httpClient.get(`${this.Api_URL}/usermaster/`+Id);
+        return this.httpClient.get(`${this.Api_URL}usermaster/read.php?USerId=`+Id);
       }
       deleteUser(Id:number)
       {
-        return this.httpClient.delete(`${this.Api_URL}usermaster/`+Id);
+        return this.httpClient.delete(`${this.Api_URL}usermaster/delete.php`+Id);
       }
 }

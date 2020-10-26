@@ -140,13 +140,15 @@ export class UserListComponent implements OnInit {
   // Delete User
   deleteUser()
   {
+   
     if(this.Id !=0)
     {
       this.userService.deleteUser(this.Id).subscribe((udata:any) =>
       {
+        
         if(udata != null)
         {
-          
+          //alert(udata);
             this.toastr.success("User deleted successfully");
            this.modalService.dismissAll("Cross click");
 

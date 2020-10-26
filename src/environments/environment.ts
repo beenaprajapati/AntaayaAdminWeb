@@ -4,7 +4,8 @@
 
 export const environment = {
     production: false,
-    baseUrl:'https://antaayaarchitects.com/antaaya_api/'
+    // baseUrl:'https://antaayaarchitects.com/antaaya_api/'
+    baseUrl:'https://antaayaarchitects.com/restapi/'
 };
 
 /*

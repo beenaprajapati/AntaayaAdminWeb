@@ -10,8 +10,8 @@ export class UserService {
         {
 
         }
-        createUser(user: User,id :number): Observable<User>{
-        if(id==0)
+        createUser(user: User,USerId :number): Observable<User>{
+        if(USerId==0)
         {
           return this.httpClient.post<User>(`${this.Api_URL}usermaster/create`, user);
         }
@@ -27,14 +27,25 @@ export class UserService {
         params = params.append('limit', PageSize);
         params = params.append('sort_type', sortHeader);
         params = params.append('keyword', searchText);
-        return this.httpClient.get(`${this.Api_URL}usermaster/read.php`);
+        //return this.httpClient.get(`${this.Api_URL}usermaster/read.php`);
+        //return this.httpClient.get(`${this.Api_URL}usermaster?limit=`+100+`&offset=`+1+`&sort_by=FirstName&sort_type=asc`);
+         //alert(this.httpClient.get(`${this.Api_URL}usermaster/14`,{responseType: 'json'}));
+
+          //  this.http.post(
+          // 'http://10.0.1.19/login',
+          // {email, password},
+          // {responseType: 'text'})
+         //return this.httpClient.get(`https://antaayaarchitects.com/RESTAPI/usermaster?limit=100&offset=1&sort_by=&sort_type=&keyword=`);
+        return this.httpClient.get(`${this.Api_URL}usermaster?limit=`+PageSize+`&offset=`+PageIndex+`&sort_by=&sort_type=`+sortHeader+`&keyword=`+searchText +``);
       }
       getUserByID(Id:number)
       {
-        return this.httpClient.get(`${this.Api_URL}usermaster/read.php?USerId=`+Id);
+        // alert(Id);
+        return this.httpClient.get(`${this.Api_URL}usermaster/index_get/`+Id);
       }
       deleteUser(Id:number)
       {
-        return this.httpClient.delete(`${this.Api_URL}usermaster/delete.php`+Id);
+        // alert(Id);
+        return this.httpClient.delete(`${this.Api_URL}Usermaster/Delete/`+Id);
       }
 }

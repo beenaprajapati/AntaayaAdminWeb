@@ -99,5 +99,9 @@ export class CreateUserComponent implements OnInit {
       event.preventDefault();
     }
   }
+  Cancel()
+  {
+    this.router.navigate(['/users/user-list']);
+  }
 
 }

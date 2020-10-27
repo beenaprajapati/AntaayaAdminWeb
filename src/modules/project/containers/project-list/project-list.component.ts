@@ -78,17 +78,14 @@ export class ProjectListComponent implements OnInit {
       this.paginator.firstPage();
     }
     this.projectService.getProject(this.SearchText, this.pageIndex, this.pageSize, this.sortHeader).subscribe((user: any) => {
-      if(user != null)
-      { setTimeout( () => {
-
+      if(user.Data.length > 0)
+      { 
         this.dataSource.data=user.Data;
         for(var i=0;i<user.Data.length ;i++)
         {
         this.rowCount =user.Data[i].RowCount;
         }
         this.gridTotalRecord = this.rowCount;
-        
-      },0);
       }
       else {
         this.dataSource.data= [];

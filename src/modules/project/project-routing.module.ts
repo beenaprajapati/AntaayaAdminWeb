@@ -48,14 +48,14 @@ export const ROUTES: Routes = [
     {
         path: 'Edit/:Id',
         data: {
-            title: 'UpdateUser',
+            title: 'UpdateProject',
             breadcrumbs: [
                 {
                     text: 'Dashboard',
                     link: '/dashboard',
                 },
                 {
-                    text: 'Update User',
+                    text: 'Update Project',
                     active: true,
                 },
             ],

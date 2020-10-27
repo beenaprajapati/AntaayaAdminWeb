@@ -83,7 +83,7 @@ export const sideNavItems: SideNavItems = {
     users:
     {
         icon: 'user',
-        text: 'Users',
+        text: 'User',
 
         // submenu: [
         //     {
@@ -99,7 +99,7 @@ export const sideNavItems: SideNavItems = {
     project:
     {
         icon: 'user',
-        text: 'project',
+        text: 'Project',
         link: '/project/project-list',
 
     }

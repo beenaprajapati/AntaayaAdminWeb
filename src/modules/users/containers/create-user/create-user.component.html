@@ -1,174 +1,204 @@
-<sb-layout-dashboard
-    ><sb-dashboard-head *ngIf="Id == 0" title="Create User" [hideBreadcrumbs]="false"></sb-dashboard-head
-    >
-    <sb-dashboard-head *ngIf="Id != 0" title="Update User" [hideBreadcrumbs]="false"></sb-dashboard-head
-        >
+<sb-layout-dashboard>
+    <sb-dashboard-head *ngIf="Id == 0" title="Create User" [hideBreadcrumbs]="false"></sb-dashboard-head>
+    <sb-dashboard-head *ngIf="Id != 0" title="Update User" [hideBreadcrumbs]="false"></sb-dashboard-head>
+    <div class="content">
 
-    
-    <form name="form" (ngSubmit)="f.form.valid && saveUser(f)" novalidate #f="ngForm">
-        <div class="form-row">
-          
-            
-            <div class="form-group col-4">
-                <label for="FirstName">First Name</label>
-                <input type="text" name="FirstName" class="form-control"  [(ngModel)]="model.FirstName" #FirstName="ngModel"  required>
-                <span class="text-danger"
-                *ngIf="(FirstName.touched || f.submitted) && FirstName.errors?.required">
-                First Name is required
-            </span>
-            </div>
-            <div class="form-group col-4">
-                <label for="MiddleName">Middle Name</label>
-                <input type="text" name="MiddleName" class="form-control"  [(ngModel)]="model.MiddleName" #MiddleName="ngModel"  required>
-                <span class="text-danger"
-                *ngIf="(MiddleName.touched || f.submitted) && MiddleName.errors?.required">
-                Middle Name is required
-            </span>
-            </div>
-            <div class="form-group col-4">
-                <label for="LastName">  Last Name</label>
-                <input type="text" name="LastName" class="form-control" [(ngModel)]="model.LastName" #LastName="ngModel" required>
-                <span class="text-danger"
-                *ngIf="(LastName.touched || f.submitted) && LastName.errors?.required">
-                Last Name is required
-            </span>
-            </div>
-            
-        </div>
-        
-      <div class="form-row">
-        <div class="form-group col-4">
-            <label for="Email">Email</label>
-            <input type="text" name="Email" class="form-control" [(ngModel)]="model.Email" #Email="ngModel"  required email>
-            <span class="text-danger"
-                *ngIf="(Email.touched || f.submitted) && Email.errors?.required">
-                Email is required
-            </span>
-            <span class="text-danger" *ngIf="(Email.touched || f.submitted)  && Email.errors?.email">
-                Enter a valid email address
-            </span>
-        </div>
-        <div class="form-group col-4">
-            <label for="Mobile">Mobile</label>
-            <input type="text" name="Mobile" [pattern]="mobNumberPattern" class="form-control" [(ngModel)]="model.Mobile" #Mobile="ngModel" required >
-            <span class="text-danger"
-                *ngIf="(Mobile.touched || f.submitted) && Mobile.errors?.required">
-                Mobile is required
-            </span>
-            <span class="text-danger" *ngIf="Mobile.errors?.pattern">  
-                Mobile number not valid.  
-            </span> 
-        </div>
-        <div class="form-group col-4">
-            <label>User Type</label>
-            <select name="Type" class="form-control" [(ngModel)]="model.Type" #Type="ngModel"  required>
-                <option value="">--Select--</option>
-                <option value="Admin">Admin</option>
-                <option value="Normal User">Normal User</option>
-            </select>
-            <span class="text-danger"
-            *ngIf="(Type.touched || f.submitted) && Type.errors?.required">
-            User Type is required
-        </span>
-        </div>
-        
-        </div>
-        <div class="form-row">
-            
-            <div class="form-group col-4">
-                <label>Branch</label>
-                <select name="Branch" class="form-control" [(ngModel)]="model.Branch" #Branch="ngModel"  required>
-                    <option value="">--Select--</option>
-                    <option value="1">Main Branch</option>
-                    <option value="2">Sub Branch</option>
-                </select>
-                <span class="text-danger"
-                    *ngIf="(Branch.touched || f.submitted) && Branch.errors?.required">
-                    Branch is required
-                </span>
-            </div>
+        <div class="row">
+            <div class="col-lg-12 m-b-30">
 
-            <div class="form-group col-4">
-                <label for="Company">Company</label>
-                <select name="Company" class="form-control" id="company" [(ngModel)]="model.Company" #Company="ngModel" required>
-                    <option value="0">--Select--</option>
-                    <option value="1">ABC</option>
-                    <option value="2">XYZ</option>
-                  
-                </select>
-                <span class="text-danger"
-                *ngIf="(Company.touched || f.submitted) && Company.errors?.required">
-                Company is required
-            </span>
-            </div>
-            
-                
-            <div class="form-group col-4">
-                <div class="form-group form-check">
-                    <input type="checkbox" name="Active" id="active" class="form-check-input" checked="false" [(ngModel)]="model.Active" #Active="ngModel">
-                    <label for="Active" class="form-check-label">IsActive</label>
-                </div> 
-                
-                </div>
-           
-    </div>
-   
-        <div class="form-row">
-              
-            <div class="form-group col-4">
-                <label for="UserName">User Name</label>
-                <input type="text" name="UserName" class="form-control"  [(ngModel)]="model.UserName" #UserName="ngModel"  required>
-                <span class="text-danger"
-                *ngIf="(UserName.touched || f.submitted) && UserName.errors?.required">
-                User Name is required
-            </span>
-            </div>
-            <div class="form-group col-4">
-                <label>Password</label>
-                <input type="password" name="Password" class="form-control" [(ngModel)]="model.Password" #Password="ngModel"  required minlength="6">
-               
-                <span class="text-danger"
-            *ngIf="(Password.touched || f.submitted) && Password.errors?.required">
-            Password is required
-        </span>
-        <span class="text-danger" *ngIf="Password.errors?.minlength">
-            Password minimum length should be 6 character
-        </span>
-            </div>
-            <div class="form-group col-4">
-                <label>Confirm Password</label>
-                <input type="password" name="ConfirmPassword" class="form-control" [(ngModel)]="model.ConfirmPassword" #ConfirmPassword="ngModel" required appConfirmEqualValidator='Password' minlength="6"> 
-                <div *ngIf="f.submitted && ConfirmPassword.invalid" class="invalid-feedback">
-                    <div *ngIf="ConfirmPassword.errors?.required">Confirm Password is required</div>
-                    <div *ngIf="ConfirmPassword.errors?.mustMatch">Passwords must match</div>
-                </div>
-                <span class="text-danger"
-                                *ngIf="(ConfirmPassword.touched || f.submitted) && ConfirmPassword.errors?.required">
-                                Confirm Password is required
-                            </span>
-                            <div  class="text-danger" *ngIf="ConfirmPassword.errors?.notEqual && !ConfirmPassword.errors?.required">Confirm password mismatch with password
-                            </div>
- 
-            </div>
-        </div>
-        
-        <div class="form-row">
-            <div class="form-group col-4">
-                <label for="file" class="d-flex mb-3 pt-1">Profile Photo</label>
-                <span class="img-upload mt-0 mb-3">
-        <input type="file"  class="form-control" name="Photo" [(ngModel)]="model.Photo" #Photo="ngModel" 
-           id="file"
-           (change)="handleFileInput($event.target.files)">
-        </span>
-                <!-- <span class="text-danger photo"
+                <mat-card>
+                    <div class="row">
+                        <div class="col-md-12 col-ld-8">
+
+
+                            <form name="form" (ngSubmit)="f.form.valid && saveUser(f)" novalidate #f="ngForm">
+                                <div class="form-row">
+
+
+                                    <div class="form-group col-4">
+                                        <label for="FirstName">First Name</label>
+                                        <input type="text" name="FirstName" class="form-control"
+                                            [(ngModel)]="model.FirstName" #FirstName="ngModel" required>
+                                        <span class="text-danger"
+                                            *ngIf="(FirstName.touched || f.submitted) && FirstName.errors?.required">
+                                            First Name is required
+                                        </span>
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <label for="MiddleName">Middle Name</label>
+                                        <input type="text" name="MiddleName" class="form-control"
+                                            [(ngModel)]="model.MiddleName" #MiddleName="ngModel" required>
+                                        <span class="text-danger"
+                                            *ngIf="(MiddleName.touched || f.submitted) && MiddleName.errors?.required">
+                                            Middle Name is required
+                                        </span>
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <label for="LastName"> Last Name</label>
+                                        <input type="text" name="LastName" class="form-control"
+                                            [(ngModel)]="model.LastName" #LastName="ngModel" required>
+                                        <span class="text-danger"
+                                            *ngIf="(LastName.touched || f.submitted) && LastName.errors?.required">
+                                            Last Name is required
+                                        </span>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group col-4">
+                                        <label for="Email">Email</label>
+                                        <input type="text" name="Email" class="form-control" [(ngModel)]="model.Email"
+                                            #Email="ngModel" required email>
+                                        <span class="text-danger"
+                                            *ngIf="(Email.touched || f.submitted) && Email.errors?.required">
+                                            Email is required
+                                        </span>
+                                        <span class="text-danger"
+                                            *ngIf="(Email.touched || f.submitted)  && Email.errors?.email">
+                                            Enter a valid email address
+                                        </span>
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <label for="Mobile">Mobile</label>
+                                        <input type="text" name="Mobile" [pattern]="mobNumberPattern"
+                                            class="form-control" [(ngModel)]="model.Mobile" #Mobile="ngModel" required>
+                                        <span class="text-danger"
+                                            *ngIf="(Mobile.touched || f.submitted) && Mobile.errors?.required">
+                                            Mobile is required
+                                        </span>
+                                        <span class="text-danger" *ngIf="Mobile.errors?.pattern">
+                                            Mobile number not valid.
+                                        </span>
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <label>User Type</label>
+                                        <select name="Type" class="form-control" [(ngModel)]="model.Type"
+                                            #Type="ngModel" required>
+                                            <option value="">--Select--</option>
+                                            <option value="Admin">Admin</option>
+                                            <option value="Normal User">Normal User</option>
+                                        </select>
+                                        <span class="text-danger"
+                                            *ngIf="(Type.touched || f.submitted) && Type.errors?.required">
+                                            User Type is required
+                                        </span>
+                                    </div>
+
+                                </div>
+                                <div class="form-row">
+
+                                    <div class="form-group col-4">
+                                        <label>Branch</label>
+                                        <select name="Branch" class="form-control" [(ngModel)]="model.Branch"
+                                            #Branch="ngModel" required>
+                                            <option value="">--Select--</option>
+                                            <option value="1">Main Branch</option>
+                                            <option value="2">Sub Branch</option>
+                                        </select>
+                                        <span class="text-danger"
+                                            *ngIf="(Branch.touched || f.submitted) && Branch.errors?.required">
+                                            Branch is required
+                                        </span>
+                                    </div>
+
+                                    <div class="form-group col-4">
+                                        <label for="Company">Company</label>
+                                        <select name="Company" class="form-control" id="company"
+                                            [(ngModel)]="model.Company" #Company="ngModel" required>
+                                            <option value="0">--Select--</option>
+                                            <option value="1">ABC</option>
+                                            <option value="2">XYZ</option>
+
+                                        </select>
+                                        <span class="text-danger"
+                                            *ngIf="(Company.touched || f.submitted) && Company.errors?.required">
+                                            Company is required
+                                        </span>
+                                    </div>
+
+
+                                    <div class="form-group col-4">
+                                        <div class="form-group form-check">
+                                            <input type="checkbox" name="Active" id="active" class="form-check-input"
+                                                checked="false" [(ngModel)]="model.Active" #Active="ngModel">
+                                            <label for="Active" class="form-check-label">IsActive</label>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="form-row">
+
+                                    <div class="form-group col-4">
+                                        <label for="UserName">User Name</label>
+                                        <input type="text" name="UserName" class="form-control"
+                                            [(ngModel)]="model.UserName" #UserName="ngModel" required>
+                                        <span class="text-danger"
+                                            *ngIf="(UserName.touched || f.submitted) && UserName.errors?.required">
+                                            User Name is required
+                                        </span>
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <label>Password</label>
+                                        <input type="password" name="Password" class="form-control"
+                                            [(ngModel)]="model.Password" #Password="ngModel" required minlength="6">
+
+                                        <span class="text-danger"
+                                            *ngIf="(Password.touched || f.submitted) && Password.errors?.required">
+                                            Password is required
+                                        </span>
+                                        <span class="text-danger" *ngIf="Password.errors?.minlength">
+                                            Password minimum length should be 6 character
+                                        </span>
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <label>Confirm Password</label>
+                                        <input type="password" name="ConfirmPassword" class="form-control"
+                                            [(ngModel)]="model.ConfirmPassword" #ConfirmPassword="ngModel" required
+                                            appConfirmEqualValidator='Password' minlength="6">
+                                        <div *ngIf="f.submitted && ConfirmPassword.invalid" class="invalid-feedback">
+                                            <div *ngIf="ConfirmPassword.errors?.required">Confirm Password is required
+                                            </div>
+                                            <div *ngIf="ConfirmPassword.errors?.mustMatch">Passwords must match</div>
+                                        </div>
+                                        <span class="text-danger"
+                                            *ngIf="(ConfirmPassword.touched || f.submitted) && ConfirmPassword.errors?.required">
+                                            Confirm Password is required
+                                        </span>
+                                        <div class="text-danger"
+                                            *ngIf="ConfirmPassword.errors?.notEqual && !ConfirmPassword.errors?.required">
+                                            Confirm password mismatch with password
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group col-4">
+                                        <label for="file" class="d-flex mb-3 pt-1">Profile Photo</label>
+                                        <span class="img-upload mt-0 mb-3">
+                                            <input type="file" class="form-control" name="Photo"
+                                                [(ngModel)]="model.Photo" #Photo="ngModel" id="file"
+                                                (change)="handleFileInput($event.target.files)">
+                                        </span>
+                                        <!-- <span class="text-danger photo"
             *ngIf="(Photo.touched || f.submitted) && Photo.errors?.required">
             Profile Photo is required
         </span> -->
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <button class="btn btn-primary mr-1">Save</button>
+                                    <button class="btn btn-secondary" type="reset" (click)="Cancel()">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
         </div>
-        </div>
-        <div class="text-center">
-            <button class="btn btn-primary mr-1">Save</button>
-            <button class="btn btn-secondary" type="reset" (click)="Cancel()">Cancel</button>
-        </div>
-    </form>
+    </div>
+
 </sb-layout-dashboard>

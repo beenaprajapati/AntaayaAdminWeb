@@ -71,14 +71,15 @@
 
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
               <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-              <ng-container>
-                <td mat-footer-cell *matFooterCellDef colspan="6" [ngClass]="{'hide':(dataSource.length >0)}">
+              <ng-container matColumnDef="noData">
+                <td mat-footer-cell *matFooterCellDef colspan="7">
                   No records found
                 </td>
               </ng-container>
 
-              <!-- <tr mat-footer-row *matFooterRowDef="['noData']"
-          [ngClass]="{'hide':(dataSource.length >0)}"></tr>                -->
+              <tr mat-footer-row *matFooterRowDef="['noData']"
+                  [ngClass]="{'hide':dataSource.data.length > 0}"></tr>  
+              
             </table>
           </div>
           <mat-paginator [pageSize]="10" [length]="gridTotalRecord" [pageSizeOptions]="pageSizeList"

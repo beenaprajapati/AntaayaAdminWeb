@@ -75,7 +75,7 @@ export class UserListComponent implements OnInit {
       this.paginator.firstPage();
     }
     this.userService.getUser(this.SearchText,this.pageIndex, this.pageSize, this.sortHeader).subscribe((user: any)=>{
-      if(user != null)
+      if(user.items.length >0)
       { 
         this.dataSource.data=user.items;
         console.log(user);

@@ -14,6 +14,7 @@ import { MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { LoaderService } from '../modules/app-common/services/loader.service';
 import { LoaderInterceptor } from '../modules/app-common/interceptors/loader-interceptor.service';
@@ -26,7 +27,9 @@ import { MyLoaderComponent } from '../modules/app-common/components/my-loader/my
         ToastrModule.forRoot(),MatTableModule,
         MatPaginatorModule,MatSortModule,MatMenuModule,MatIconModule,
         MatFormFieldModule,MatInputModule,
-        NgbModule],
+        NgbModule,
+        MatCardModule],
+        
     providers: [ LoaderService,
         { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }],
     bootstrap: [AppComponent],

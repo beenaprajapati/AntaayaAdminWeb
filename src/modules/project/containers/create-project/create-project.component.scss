@@ -1,0 +1,39 @@
+
+.img-upload {
+    position: relative;
+    width: 130px;
+    overflow: hidden;
+    margin-top: 17px;
+    display: inline-block;
+    height: 36px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+.img-upload input[type="file"] {
+    box-sizing: border-box;
+    display: inline-block;
+    width: 100%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    box-sizing: border-box;
+    z-index: 6;
+    position: relative;
+    opacity: 0;
+    cursor: pointer;
+}
+.img-upload:after {
+    background-color: #ddd;
+    content: 'choose file';
+    display: block;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+    color: #000;
+    text-align: center;
+    line-height: 34px;
+    text-transform: capitalize;
+}

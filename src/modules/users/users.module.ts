@@ -24,6 +24,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { MatCardModule } from '@angular/material/card';
 @NgModule({
   
   imports: [
@@ -40,7 +41,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     MatIconModule,
     MatInputModule,
     MatFormFieldModule,
-    NgbModule
+    NgbModule,
+    MatCardModule
 
   ],
 

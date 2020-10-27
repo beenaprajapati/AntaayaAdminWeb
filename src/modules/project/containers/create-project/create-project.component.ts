@@ -39,7 +39,7 @@ export class CreateProjectComponent implements OnInit {
         {
           if(udata != null)
           {
-            this.model=udata;
+            this.model=udata.Data[0];
             this.labelFile= this.model.FileUpload;
           }
         })

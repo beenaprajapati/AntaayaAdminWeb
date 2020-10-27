@@ -46,15 +46,9 @@ export class ProjectListComponent implements OnInit {
       this.dataSource = new MatTableDataSource<Project>([]);
   }
 
-  ngOnInit(): void {
-    
-      setTimeout(() => {
-        
+  ngOnInit() {
       
         this.bindProjectList(false);
-        
-        
-      },5000);
     
    
   }
@@ -87,15 +81,12 @@ export class ProjectListComponent implements OnInit {
       if(user != null)
       { setTimeout( () => {
 
-        this.dataSource.data=user;
-        this.dataSource = new MatTableDataSource<User>(user);
-        //this.dataSource = new MatTableDataSource(user);
-        for(var i=0;i<user.length ;i++)
+        this.dataSource.data=user.Data;
+        for(var i=0;i<user.Data.length ;i++)
         {
-        this.rowCount =user[i].RowCount;
+        this.rowCount =user.Data[i].RowCount;
         }
         this.gridTotalRecord = this.rowCount;
-        this.cd.detectChanges();
         
       },0);
       }

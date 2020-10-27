@@ -154,10 +154,12 @@
         
         <div class="form-row">
             <div class="form-group col-4">
-                <label for="file">Profile Photo</label>
+                <label for="file" class="d-flex mb-3 pt-1">Profile Photo</label>
+                <span class="img-upload mt-0 mb-3">
         <input type="file"  class="form-control" name="Photo" [(ngModel)]="model.Photo" #Photo="ngModel" 
            id="file"
            (change)="handleFileInput($event.target.files)">
+        </span>
                 <!-- <span class="text-danger photo"
             *ngIf="(Photo.touched || f.submitted) && Photo.errors?.required">
             Profile Photo is required

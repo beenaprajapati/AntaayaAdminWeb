@@ -37,7 +37,7 @@ export const ROUTES: Routes = [
                     link: '/dashboard',
                 },
                 {
-                    text: 'Create User',
+                    text: 'Create Project',
                     active: true,
                 },
             ],

@@ -26,7 +26,8 @@ export class ProjectService {
         params = params.append('offset', PageIndex);
         params = params.append('limit', PageSize);
         params = params.append('sort_type', sortHeader);
-        return this.httpClient.get(`${this.Api_URL}createproject/`,{params:params});
+        return this.httpClient.get(`${this.Api_URL}createproject?limit=`+PageSize+`&offset=`+PageIndex+`&sort_by=&sort_type=`+sortHeader+`&keyword=`+searchText +``);
+        
       }
       getProjectByID(Id:number)
       {
@@ -34,6 +35,7 @@ export class ProjectService {
       }
       deleteProject(Id:number)
       {
+        
         return this.httpClient.delete(`${this.Api_URL}createproject/`+Id);
       }
 }

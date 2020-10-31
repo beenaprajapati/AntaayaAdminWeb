@@ -19,6 +19,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { LoaderService } from '../modules/app-common/services/loader.service';
 import { LoaderInterceptor } from '../modules/app-common/interceptors/loader-interceptor.service';
 import { MyLoaderComponent } from '../modules/app-common/components/my-loader/my-loader.component';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 @NgModule({
     declarations: [AppComponent,MyLoaderComponent],
     imports: [BrowserModule, AppRoutingModule,
@@ -28,7 +29,8 @@ import { MyLoaderComponent } from '../modules/app-common/components/my-loader/my
         MatPaginatorModule,MatSortModule,MatMenuModule,MatIconModule,
         MatFormFieldModule,MatInputModule,
         NgbModule,
-        MatCardModule],
+        MatCardModule,
+        OwlDateTimeModule, OwlNativeDateTimeModule],
         
     providers: [ LoaderService,
         { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }],

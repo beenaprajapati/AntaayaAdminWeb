@@ -51,6 +51,16 @@ const routes: Routes = [
           import('modules/project/project-routing.module').then(m => m.ProjectRoutingModule),
     },
     {
+        path: 'items',
+         loadChildren: () => 
+         import('modules/items/item-routing.module').then(m => m.ItmeRoutingModule),
+   },
+   {
+    path: 'task',
+     loadChildren: () => 
+     import('modules/task/task-routing.module').then(m => m.TaskRoutingModule),
+},
+    {
         path: '**',
         pathMatch: 'full',
         loadChildren: () =>

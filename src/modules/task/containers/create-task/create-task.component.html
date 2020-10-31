@@ -1,0 +1,126 @@
+<sb-layout-dashboard>
+    <sb-dashboard-head *ngIf="Id == 0" title="Create Task" [hideBreadcrumbs]="false"></sb-dashboard-head>
+
+    <sb-dashboard-head *ngIf="Id != 0" title="Update Task" [hideBreadcrumbs]="false"></sb-dashboard-head>
+
+
+    <div class="content">
+
+        <div class="row">
+            <div class="col-lg-12 m-b-30">
+
+                <mat-card>
+                    <div class="row">
+                        <div class="col-md-12 col-ld-8">
+                            <form name="form" (ngSubmit)="f.form.valid && saveTask(f)" novalidate #f="ngForm">
+                                <div class="form-row">
+
+
+                                    <div class="form-group col-4">
+                                        <label for="Task">Task Name</label>
+                                        <input type="text" name="Task" class="form-control"
+                                            [(ngModel)]="model.Task" #Task="ngModel" required>
+                                        <span class="text-danger"
+                                            *ngIf="(Task.touched || f.submitted) && Task.errors?.required">
+                                            Task Name is required
+                                        </span>
+                                    </div>
+                                   
+                                    <div class="form-group col-4">
+                                        <label for="project">Project Name</label>
+                                        <select id="inputState"  class="form-control" #ProjectID="ngModel" [(ngModel)]="model.ProjectID" name="ProjectID"
+                                         required>
+                                        <option value="" selected>Select</option>
+                                        <option *ngFor="let project of projects" [value]="project.ProjectID">{{project.PorjectName}}</option>
+                                    </select>
+                                         <span class="text-danger"
+                                         *ngIf="(ProjectID.touched || f.submitted) && ProjectID.errors?.required">
+                                         Project Name is required
+                                     </span>
+                                     
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <label for="user">User Name</label>
+                                        <select id="inputState1"  class="form-control" #USerId="ngModel" [(ngModel)]="model.USerId" name="USerId"
+                                         required>
+                                        <option value="">Select</option>
+                                        <option *ngFor="let user of users" [value]="user.USerId">{{user.FirstName+' '+user.LastName}}</option>
+                                    </select>
+                                         <span class="text-danger"
+                                         *ngIf="(USerId.touched || f.submitted) && USerId.errors?.required">
+                                         User Name is required
+                                     </span>
+                                     
+                                    </div>
+
+                                </div>
+
+                                <div class="form-row">
+
+                                    <div class="form-group col-4">
+                                        <label for="MobileNo">Hour</label>
+                                        <input [owlDateTimeTrigger]="dt4" class="form-control" [owlDateTime]="dt4" required
+                                        [(ngModel)]="model.Hour" #Hour="ngModel" name="Hour" readonly>
+                                        <owl-date-time [pickerType]="'timer'" #dt4></owl-date-time>
+                                        <span class="text-danger"
+                                        *ngIf="(Hour.touched || f.submitted) && Hour.errors?.required">
+                                        Hour is required
+                                    </span>
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <label>Employee Remark</label>
+                                        <textarea type="text" name="EmpRemark" class="form-control"
+                                            [(ngModel)]="model.EmpRemark" #EmpRemark="ngModel"></textarea>
+                                       
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <label for="Remark">Remark</label>
+                                        <textarea type="text" name="Remark" class="form-control"
+                                            [(ngModel)]="model.Remark" #Remark="ngModel">
+                    </textarea>
+
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="form-row">
+                                    <div class="form-group col-4">
+                                        <label>Status</label>
+                                        <select name="Status" class="form-control" [(ngModel)]="model.Status"
+                                            #Status="ngModel" required>
+                                            <option value="">--Select--</option>
+                                            <option value="Done">Done</option>
+                                            <option value="Active">Active</option>
+                                            <option value="IsActive">IsActive</option>
+                                        </select>
+                                        <span class="text-danger"
+                                            *ngIf="(Status.touched || f.submitted) && Status.errors?.required">
+                                            Status is required
+                                        </span>
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <label for="file" class="d-flex mb-3 pt-1">Employee Photo</label>
+                                        <span class="img-upload mt-0 mb-3">
+                                            <input type="file" class="form-control" name="FileUpload"
+                                                [(ngModel)]="model.FileUpload" #FileUpload="ngModel" id="FileUpload"
+                                                (change)="handleFileInput($event.target.files)">
+                                        </span>
+                                    </div>
+                                </div>
+
+
+                                <div class="text-center">
+                                    <button class="btn btn-primary mr-1">Save</button>
+                                    <button class="btn btn-secondary" type="reset" (click)="Cancel()">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </mat-card>
+
+            </div>
+        </div>
+    </div>
+</sb-layout-dashboard>

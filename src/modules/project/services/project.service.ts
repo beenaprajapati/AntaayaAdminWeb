@@ -21,21 +21,16 @@ export class ProjectService {
         }
       }
       getProject(searchText:any, PageIndex:any, PageSize:any, sortHeader:any) {
-        let params = new HttpParams();
-        params = params.append('sort_by', searchText);
-        params = params.append('offset', PageIndex);
-        params = params.append('limit', PageSize);
-        params = params.append('sort_type', sortHeader);
+        
         return this.httpClient.get(`${this.Api_URL}createproject?limit=`+PageSize+`&offset=`+PageIndex+`&sort_by=&sort_type=`+sortHeader+`&keyword=`+searchText +``);
         
       }
       getProjectByID(Id:number)
       {
-        return this.httpClient.get(`${this.Api_URL}createproject/`+Id);
+        return this.httpClient.get(`${this.Api_URL}createproject/index_get/`+Id);
       }
       deleteProject(Id:number)
-      {
-        
-        return this.httpClient.delete(`${this.Api_URL}createproject/`+Id);
+      { 
+        return this.httpClient.delete(`${this.Api_URL}createproject/index_delete/`+Id);
       }
 }

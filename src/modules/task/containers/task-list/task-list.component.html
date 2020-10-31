@@ -1,5 +1,5 @@
 <sb-layout-dashboard>
-  <sb-dashboard-head title="Project List" [hideBreadcrumbs]="false"></sb-dashboard-head>
+  <sb-dashboard-head title="Task List" [hideBreadcrumbs]="false"></sb-dashboard-head>
   <div class="content">
 
     <div class="row">
@@ -8,8 +8,8 @@
           <div class="custom-row">
             <div class="add-buttons">
               <button class="addUser" type="button" mat-raised-button color="primary" mat-button
-                routerLink="/project/create-project" title="User">
-                <span><i class="material-icons">add</i> Project</span>
+                routerLink="/task/create-task" title="User">
+                <span><i class="material-icons">add</i> Task</span>
               </button>
             </div>
             <div class="search-part mr-2">
@@ -32,14 +32,14 @@
                       <mat-icon>more_vert</mat-icon>
                     </button>
                     <mat-menu #menu="matMenu">
-                      <button color="primary" routerLink="/project/Edit/{{row.ProjectID}}" title="Edit" mat-menu-item>
+                      <button color="primary" routerLink="/task/Edit/{{row.TaskID}}" title="Edit" mat-menu-item>
                         <mat-icon>
                           <i class="material-icons">edit </i>
                         </mat-icon>
                         <span>Edit</span>
                       </button>
 
-                      <button color="primary" (click)="open(mymodal,row.ProjectID)" title="Delete" mat-menu-item>
+                      <button color="primary" (click)="open(mymodal,row.TaskID)" title="Delete" mat-menu-item>
                         <mat-icon>
                           <i class="material-icons">delete </i>
                         </mat-icon>
@@ -50,24 +50,21 @@
                 </td>
               </ng-container>
 
-              <ng-container matColumnDef="PorjectName">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Project Name </th>
-                <td mat-cell *matCellDef="let element"> {{element.PorjectName}} </td>
+              <ng-container matColumnDef="Task">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Task Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.Task}} </td>
               </ng-container>
 
               <!-- Name Column -->
-              <ng-container matColumnDef="ClientName">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Client Name </th>
-                <td mat-cell *matCellDef="let element"> {{element.ClientName}} </td>
+              <ng-container matColumnDef="Status">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+                <td mat-cell *matCellDef="let element"> {{element.Status}} </td>
               </ng-container>
-              <ng-container matColumnDef="MobileNo">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Mobile </th>
-                <td mat-cell *matCellDef="let element"> {{element.MobileNo}} </td>
+              <ng-container matColumnDef="Remark">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Remark </th>
+                <td mat-cell *matCellDef="let element"> {{element.Remark}} </td>
               </ng-container>
-              <ng-container matColumnDef="BujgetValues">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Budget Value </th>
-                <td mat-cell *matCellDef="let element"> {{element.BujgetValues}} </td>
-              </ng-container>
+              
 
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
               <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
